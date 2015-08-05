@@ -4,7 +4,7 @@ module.exports = function(config){
     basePath : '../',
 
     files : [
-      'Shop.js',
+      '*.js',
       'test/testSpec.js'
     ],
 
