@@ -2,18 +2,18 @@ function Shop(obj){
 
 }
 Shop.shopList = [];
-Shop.id = 0;
 Shop.prototype.addProduct = function(obj){
 	obj.shopId = this.id;
+	obj.shopName = this.name;
+	obj.shopCity = this.city;
 	Product.create(obj);
 }
 Shop.create = function(obj) {
 	var shop = new Shop();
 	shop.name = obj.name;
 	shop.city = obj.city;
-	shop.id = Shop.id;
+	shop.id = Shop.shopList.length;
 	Shop.shopList.push(shop);
-	Shop.id++;
 	return shop;
 }
 Shop.getAll = function() {
