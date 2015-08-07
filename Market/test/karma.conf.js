@@ -4,8 +4,12 @@ module.exports = function(config){
     basePath : '../',
 
     files : [
-      '*.js',
-      'test/testSpec.js'
+      'Repositories/Repository.js',
+      'Repositories/ShopRepository.js',
+      'Repositories/ProductRepository.js',
+      'Storage.js',
+      'Factories/*.js',
+      'test/repositorySpec.js'
     ],
 
     autoWatch : true,

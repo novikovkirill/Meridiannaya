@@ -1,13 +1,6 @@
 function Shop(obj){
 
 }
-Shop.shopList = [];
-Shop.prototype.addProduct = function(obj){
-	obj.shopId = this.id;
-	obj.shopName = this.name;
-	obj.shopCity = this.city;
-	Product.create(obj);
-}
 Shop.create = function(obj) {
 	var shop = new Shop();
 	shop.name = obj.name;
@@ -16,6 +9,14 @@ Shop.create = function(obj) {
 	Shop.shopList.push(shop);
 	return shop;
 }
+Shop.shopList = [];
+Shop.prototype.addProduct = function(obj){
+	obj.shopId = this.id;
+	obj.shopName = this.name;
+	obj.shopCity = this.city;
+	Product.create(obj);
+}
+
 Shop.getAll = function() {
 	return this.shopList;
 }
