@@ -1,14 +1,17 @@
-function ShopRepository() {
-    Repository.call(this);
+function OrderRepository() {
+    Repository.apply(this, arguments);
 }
 
-ShopRepository.prototype.createShop = function(data){
-	var shop = Shop.create(data);
-	this.storage.addData(shop);
-	return shop;
-}
+OrderRepository.prototype = Object.create(Repository.prototype);
+OrderRepository.prototype.constructor = OrderRepository;
 
-ShopRepository.prototype.findByCity = function(value){
-	return this.storage.findByKeyValue("city", value)
+OrderRepository.prototype.createOrder = function(data){
+	if (data.product.amount >= data.amount){
+		data.product.amount-=data.amount;
+		var order = Order.create(data);
+		this.storage.addData(order);
+		return order;
+	}
+	else 
+		alert("Такого количества товара нет на складе");
 }
-

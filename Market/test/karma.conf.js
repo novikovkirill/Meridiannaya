@@ -4,9 +4,8 @@ module.exports = function(config){
     basePath : '../',
 
     files : [
-      'Repositories/Repository.js',
-      'Repositories/ShopRepository.js',
-      'Repositories/ProductRepository.js',
+      'Repository.js',
+      'Repositories/*.js',
       'Storage.js',
       'Factories/*.js',
       'test/repositorySpec.js'

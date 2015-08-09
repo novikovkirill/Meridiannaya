@@ -19,5 +19,5 @@ Repository.prototype.delete = function(id){
 }
 
 Repository.prototype.find = function(key, value){
-	this.storage.findByKeyValue(key, value);
+	return this.storage.findByKeyValue(key, value);
 }

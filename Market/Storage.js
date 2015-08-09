@@ -16,10 +16,10 @@ Storage.prototype.getById = function(id){
 
 Storage.prototype.findByKeyValue = function(key, value){
 	var res = [];
-	for (var i = 0; i < this.dataList.length; i++){
-		if (this.dataList[i][key].toString().toLowerCase() == value.toString().toLowerCase()) 
+	value = value.toString().toLowerCase();
+	for (var i = 0; i < this.dataList.length; i++)
+		if (this.dataList[i][key].toString().toLowerCase() == value)
 			res.push(this.dataList[i]);
-	}
 	return res;
 }
 

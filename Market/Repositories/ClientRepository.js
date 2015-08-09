@@ -1,14 +1,20 @@
-function ShopRepository() {
-    Repository.call(this);
+function ClientRepository() {
+    Repository.apply(this,arguments);
 }
 
-ShopRepository.prototype.createShop = function(data){
-	var shop = Shop.create(data);
-	this.storage.addData(shop);
-	return shop;
+ClientRepository.prototype = Object.create(Repository.prototype);
+ClientRepository.prototype.constructor = ClientRepository;
+
+ClientRepository.prototype.createClient = function(data){
+	var client = Client.create(data);
+	this.storage.addData(client);
+	return client;
 }
 
-ShopRepository.prototype.findByCity = function(value){
-	return this.storage.findByKeyValue("city", value)
+ClientRepository.prototype.refund = function(id, value){
+	var client = this.storage.getById(id);
+	client.money+=value;
 }
+
+
 
