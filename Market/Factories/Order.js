@@ -6,5 +6,6 @@ Order.create = function(obj) {
 	order.product = obj.product;
 	order.client = obj.client;
 	order.amout = obj.amount;
+	order.purchased = false;
 	return order;
 }

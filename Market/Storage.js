@@ -7,7 +7,12 @@ Storage.prototype.addData = function(data){
 }
 
 Storage.prototype.getAll = function(){
-	return this.dataList;
+	var res = [];
+	for (var i = 0; i < this.dataList.length; i++){
+		if (this.dataList[i] != undefined)
+			res.push(this.dataList[i]);
+	}
+	return res;
 }
 
 Storage.prototype.getById = function(id){
@@ -31,4 +36,3 @@ Storage.prototype.update = function(id, data){
 Storage.prototype.delete = function(id){
 	delete this.dataList[id];
 }
-

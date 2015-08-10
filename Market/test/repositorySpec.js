@@ -67,4 +67,21 @@ describe("Repository", function() {
     orderRep.createOrder({client: clientRep.getById(0), product: prodRep.getById(1), amount: 6});
     expect(orderRep.getById(0).product.amount).toBe(44);
   });
+
+  it("shoud purchase client's orders", function(){
+    orderRep.purchase(clientRep.getById(0));
+    expect(orderRep.getById(0).purchased).toBe(true);
+  });
+
+  it("shoud decrease client's money when purchasing", function(){
+    expect(clientRep.getById(0).money).toBe(400);
+  });
+
+  it("should deliever orders to client and delete them from orders Storage", function(){
+    console.log(orderRep.getAll())
+    orderRep.createOrder({client: clientRep.getById(0), product: prodRep.getById(0), amount: 1});
+    orderRep.getOrders(clientRep.getById(0));
+    console.log(orderRep.getAll())
+    expect(orderRep.getAll().length).toBe(1);
+  })
 });
