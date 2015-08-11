@@ -1,5 +1,5 @@
 describe("Repository", function() {
-
+  "use strict"
   var shopRep = new ShopRepository();
   var prodRep = new ProductRepository();
   var clientRep = new ClientRepository;
@@ -11,7 +11,7 @@ describe("Repository", function() {
 
   it("should add shop to storage", function(){
     shopRep.createShop({name: "Книжный", city: "Казань"});
-    expect(shopRep.getAll().length).toBe(1);
+    expect(shopRep.getById(0).name).toBe("Книжный");
   });
   
  it("should find shops by city", function(){
@@ -21,6 +21,7 @@ describe("Repository", function() {
     var shop3 = shopRep.createShop({name: "Юлмарт", city: "Астана"});
     var shop4 = shopRep.createShop({name: "Мелочёвка от Ильдуса", city: "Казань"});
     var shops_in_Kazan = shopRep.findByCity("Казань");
+
     expect(shops_in_Kazan).toEqual([shop0,shop4]);
   });
 
@@ -60,7 +61,7 @@ describe("Repository", function() {
 
   it("should not create order with unproper amount", function(){
     orderRep.createOrder({client: clientRep.getById(0), product: prodRep.getById(1), amount: 106});
-    expect(orderRep.getAll().length).toBe(0);
+    expect(orderRep.getById(0)).toBe(undefined);
   });
 
   it("should create order with proper amount and decrease it's product's amount with specified value", function(){
@@ -78,10 +79,8 @@ describe("Repository", function() {
   });
 
   it("should deliever orders to client and delete them from orders Storage", function(){
-    console.log(orderRep.getAll())
     orderRep.createOrder({client: clientRep.getById(0), product: prodRep.getById(0), amount: 1});
     orderRep.getOrders(clientRep.getById(0));
-    console.log(orderRep.getAll())
-    expect(orderRep.getAll().length).toBe(1);
-  })
+    expect(orderRep.getById(0)).toBe(undefined);
+  });
 });

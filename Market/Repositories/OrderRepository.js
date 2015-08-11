@@ -18,21 +18,21 @@ OrderRepository.prototype.createOrder = function(data){
 
 OrderRepository.prototype.purchase = function(client){
 	var sumPrice = 0;
-	for (var i = 0; i< this.storage.dataList.length; i++)
-		if (this.storage.dataList[i].client == client && this.storage.dataList[i].purchased == false)
-			sumPrice+=this.storage.dataList[i].amout * this.storage.dataList[i].product.price;
+	for (var id in this.storage.dataList)
+		if (this.storage.dataList[id].client == client && this.storage.dataList[id].purchased == false)
+			sumPrice+=this.storage.dataList[id].amout * this.storage.dataList[id].product.price;
 	if (sumPrice > client.money)
 		alert("Ваших средств недостаточно для оформления заказа");
 	else {
-		for (var i = 0; i< this.storage.dataList.length; i++)
-			if (this.storage.dataList[i].client == client && this.storage.dataList[i].purchased == false)
-				this.storage.dataList[i].purchased = true;
+		for (var id in this.storage.dataList)
+			if (this.storage.dataList[id].client == client && this.storage.dataList[id].purchased == false)
+				this.storage.dataList[id].purchased = true;
 		client.money-=sumPrice;
 	}
 }
 
 OrderRepository.prototype.getOrders = function(client){
-	for (var i = 0; i< this.storage.dataList.length; i++)
-		if (this.storage.dataList[i].client == client && this.storage.dataList[i].purchased == true)
-			this.storage.delete(i);
+	for (var id in this.storage.dataList)
+		if (this.storage.dataList[id].client == client && this.storage.dataList[id].purchased == true)
+			this.storage.delete(id);
 }

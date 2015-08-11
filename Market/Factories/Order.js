@@ -1,6 +1,7 @@
 function Order(){
 
 }
+
 Order.create = function(obj) {
 	var order = new Order();
 	order.product = obj.product;

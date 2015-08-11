@@ -1,18 +1,15 @@
 function Storage(){
-	this.dataList = [];
+	this.dataList = {};
+	this.idCounter = makeId();
 }
 
 Storage.prototype.addData = function(data){
-	this.dataList.push(data);
+	var id = this.idCounter();
+	this.dataList[id] = data;
 }
 
 Storage.prototype.getAll = function(){
-	var res = [];
-	for (var i = 0; i < this.dataList.length; i++){
-		if (this.dataList[i] != undefined)
-			res.push(this.dataList[i]);
-	}
-	return res;
+	return this.dataList;
 }
 
 Storage.prototype.getById = function(id){
@@ -22,9 +19,9 @@ Storage.prototype.getById = function(id){
 Storage.prototype.findByKeyValue = function(key, value){
 	var res = [];
 	value = value.toString().toLowerCase();
-	for (var i = 0; i < this.dataList.length; i++)
-		if (this.dataList[i][key].toString().toLowerCase() == value)
-			res.push(this.dataList[i]);
+	for (var id in this.dataList)
+		if (this.dataList[id][key].toString().toLowerCase() == value)
+			res.push(this.dataList[id]);
 	return res;
 }
 
@@ -35,4 +32,20 @@ Storage.prototype.update = function(id, data){
 
 Storage.prototype.delete = function(id){
 	delete this.dataList[id];
+}
+
+function makeId() {
+  var currentCount = 0;
+
+  // возвращаемся к функции
+  function counter() {
+    return currentCount++;
+  }
+
+
+  function counterReduce() { //??
+    currentCount--;
+  }
+
+  return counter;
 }
