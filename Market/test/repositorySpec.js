@@ -1,6 +1,9 @@
 describe("Repository", function() {
-
   it("should create storage", function(){
+    expect(shopRep.storage).toBeDefined();
+  })
+
+  it("should be singlotone object", function(){
     expect(shopRep == new ShopRepository).toBe(true);
   })
 
@@ -69,8 +72,8 @@ describe("Repository", function() {
     expect(prodRep.getById(1).amount).toBe(44);
   });
 
-  /*it("shoud purchase client's orders", function(){
-    orderRep.purchase(clientRep.getById(0));
+  it("shoud purchase client's orders", function(){
+    orderRep.purchase(0);
     expect(orderRep.getById(0).purchased).toBe(true);
   });
 
@@ -79,8 +82,9 @@ describe("Repository", function() {
   });
 
   it("should deliever orders to client and delete them from orders Storage", function(){
-    orderRep.createOrder({client: clientRep.getById(0), product: prodRep.getById(0), amount: 1});
-    orderRep.getOrders(clientRep.getById(0));
+    orderRep.createOrder({clientId: 0, productId: 0, amount: 1});
+    orderRep.getOrders(0);
     expect(orderRep.getById(0)).toBe(undefined);
-  });*/
+  });
+  
 });

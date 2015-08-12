@@ -3,6 +3,9 @@ var OrderRepository = (function(){
 	var instance;
 
 	function OrderRepository() {
+		if ( !instance )
+			instance = this;
+		else return instance;
 	    Repository.apply(this, arguments);
 	}
 
@@ -22,26 +25,37 @@ var OrderRepository = (function(){
 			alert("Такого количества товара нет на складе");
 	}
 
-	OrderRepository.prototype.purchase = function(client){
+	OrderRepository.prototype.findByClientId = function(id){
+		return this.storage.findByKeyValue("clientId", id)
+	}
+
+	OrderRepository.prototype.purchase = function(clientId){
 		var sumPrice = 0;
-		for (var id in this.storage.dataList)
-			if (this.storage.dataList[id].client == client && this.storage.dataList[id].purchased == false){
-				sumPrice+=this.storage.dataList[id].amout * this.storage.dataList[id].product.price;
+		var clientOrders = this.findByClientId(clientId);
+		for (var i = 0; i < clientOrders.length; i++)
+			if (clientOrders[i].purchased === false){
+				var prodRep = new ProductRepository;
+				var product = prodRep.getById(clientOrders[i].productId)
+				sumPrice+=clientOrders[i].amout * product.price;
 			}
+		var clientRep = new ClientRepository;
+		client = clientRep.getById(clientId);
 		if (sumPrice > client.money)
 			alert("Ваших средств недостаточно для оформления заказа");
 		else {
-			for (var id in this.storage.dataList)
-				if (this.storage.dataList[id].client == client && this.storage.dataList[id].purchased == false)
-					this.storage.dataList[id].purchased = true;
+			for (var i = 0; i < clientOrders.length; i++)
+				if (clientOrders[i].purchased === false)
+					clientOrders[i].purchased = true;
 			client.money-=sumPrice;
 		}
 	}
 
-	OrderRepository.prototype.getOrders = function(client){
-		for (var id in this.storage.dataList)
-			if (this.storage.dataList[id].client == client && this.storage.dataList[id].purchased == true)
-				this.storage.delete(id);
+	OrderRepository.prototype.getOrders = function(clientId){
+		var clientOrders = this.findByClientId(clientId);
+		for (var i = 0; i < clientOrders.length; i++)
+			if (clientOrders[i].purchased === true){
+				this.storage.delete(clientOrders[i].id);
+			}		
 	}
 
 	return OrderRepository;

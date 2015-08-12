@@ -3,6 +3,9 @@ var ClientRepository = (function(){
 	var instance;
 
 	function ClientRepository() {
+		if ( !instance )
+			instance = this;
+		else return instance;
 	    Repository.apply(this,arguments);
 	}
 
@@ -21,6 +24,7 @@ var ClientRepository = (function(){
 	}
 
 	return ClientRepository;
+
 })()
 
 var clientRep = new ClientRepository();
