@@ -1,26 +1,25 @@
-var Repository = (function(){
-	function Repository() {
-		this.storage = new Storage();
-	}
+		function Repository() {
 
-	Repository.prototype.getById = function(id){
-		return this.storage.getById(id);
-	}
+			this.storage = new Storage;
+		}	
 
-	Repository.prototype.getAll = function(){
-		return this.storage.getAll();
-	}
+		Repository.prototype.getById = function(id){
+			return this.storage.getById(id);
+		}
 
-	Repository.prototype.update = function(id, data){
-		this.storage.update(id, data);
-	}
+		Repository.prototype.getAll = function(){
+			return this.storage.getAll();
+		}
 
-	Repository.prototype.delete = function(id){
-		this.storage.delete(id);
-	}
+		Repository.prototype.find = function(key, value){
+			return this.storage.findByKeyValue(key, value);
+		}
 
-	Repository.prototype.find = function(key, value){
-		return this.storage.findByKeyValue(key, value);
-	}
-	return Repository;
-}());
+		Repository.prototype.update = function(id, data){
+			this.storage.update(id, data);
+		}
+
+		Repository.prototype.delete = function(id){
+			this.storage.delete(id);
+		}
+

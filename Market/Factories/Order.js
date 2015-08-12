@@ -4,8 +4,8 @@ function Order(){
 
 Order.create = function(obj) {
 	var order = new Order();
-	order.product = obj.product;
-	order.client = obj.client;
+	order.productId = obj.productId;
+	order.clientId = obj.clientId;
 	order.amout = obj.amount;
 	order.purchased = false;
 	return order;

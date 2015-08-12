@@ -1,12 +1,7 @@
 describe("Repository", function() {
-  "use strict"
-  var shopRep = new ShopRepository();
-  var prodRep = new ProductRepository();
-  var clientRep = new ClientRepository;
-  var orderRep = new OrderRepository;
 
   it("should create storage", function(){
-    expect(typeof shopRep.getAll).toBeDefined();
+    expect(shopRep == new ShopRepository).toBe(true);
   })
 
   it("should add shop to storage", function(){
@@ -32,7 +27,7 @@ describe("Repository", function() {
   });
 
   it("should create product", function(){
-    var book = prodRep.createProduct({name: "Император Мэйдзи и его Япония", price: 500, amount: 50, shop: shopRep.getById(0)});
+    var book = prodRep.createProduct({name: "Император Мэйдзи и его Япония", price: 500, amount: 50, shopId: 0});
     expect(book.name).toBe("Император Мэйдзи и его Япония");
   });
 
@@ -41,12 +36,17 @@ describe("Repository", function() {
   });
 
   it("should return products by query", function(){
-    prodRep.createProduct({name: "T-Shirt", price: 100, amount: 50, shop: shopRep.getById(2)})
-    prodRep.createProduct({name: "Cool T­Shirt", price: 200, amount: 50, shop: shopRep.getById(4)})
-    prodRep.createProduct({name: "T-Shirt", price: 150, amount: 10, shop: shopRep.getById(4)})
-    prodRep.createProduct({name: "iPhone 6", price: 50000, amount: 50, shop: shopRep.getById(3)})
+    prodRep.createProduct({name: "T-Shirt", price: 100, amount: 50, shopId: 2})
+    prodRep.createProduct({name: "Cool T­Shirt", price: 200, amount: 50, shopId: 4})
+    prodRep.createProduct({name: "T-Shirt", price: 150, amount: 10, shopId: 4})
+    prodRep.createProduct({name: "iPhone 6", price: 50000, amount: 50, shopId: 3})
     var tshirts = prodRep.find("name", "t-shirt");
     expect(tshirts.length).toBe(2);
+  });
+
+  it("should return products from specified shop", function(){
+    var otIldusa = prodRep.searchByShopId(4);
+    expect(otIldusa.length).toBe(2);
   });
 
   it("should create client", function(){
@@ -60,16 +60,16 @@ describe("Repository", function() {
   });
 
   it("should not create order with unproper amount", function(){
-    orderRep.createOrder({client: clientRep.getById(0), product: prodRep.getById(1), amount: 106});
+    orderRep.createOrder({clientId: 0, productId: 1, amount: 106});
     expect(orderRep.getById(0)).toBe(undefined);
   });
 
   it("should create order with proper amount and decrease it's product's amount with specified value", function(){
-    orderRep.createOrder({client: clientRep.getById(0), product: prodRep.getById(1), amount: 6});
-    expect(orderRep.getById(0).product.amount).toBe(44);
+    orderRep.createOrder({clientId: 0, productId: 1, amount: 6});
+    expect(prodRep.getById(1).amount).toBe(44);
   });
 
-  it("shoud purchase client's orders", function(){
+  /*it("shoud purchase client's orders", function(){
     orderRep.purchase(clientRep.getById(0));
     expect(orderRep.getById(0).purchased).toBe(true);
   });
@@ -82,5 +82,5 @@ describe("Repository", function() {
     orderRep.createOrder({client: clientRep.getById(0), product: prodRep.getById(0), amount: 1});
     orderRep.getOrders(clientRep.getById(0));
     expect(orderRep.getById(0)).toBe(undefined);
-  });
+  });*/
 });

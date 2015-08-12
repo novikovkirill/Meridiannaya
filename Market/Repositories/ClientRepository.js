@@ -1,19 +1,27 @@
-function ClientRepository() {
-    Repository.apply(this,arguments);
-}
+var ClientRepository = (function(){
 
-ClientRepository.prototype = Object.create(Repository.prototype);
-ClientRepository.prototype.constructor = ClientRepository;
+	var instance;
 
-ClientRepository.prototype.createClient = function(data){
-	var client = Client.create(data);
-	this.storage.addData(client);
-	return client;
-}
+	function ClientRepository() {
+	    Repository.apply(this,arguments);
+	}
 
-ClientRepository.prototype.refund = function(id, value){
-	var client = this.storage.getById(id);
-	client.money+=value;
-}
+	ClientRepository.prototype = Object.create(Repository.prototype);
+	ClientRepository.prototype.constructor = ClientRepository;
 
+	ClientRepository.prototype.createClient = function(data){
+		var client = Client.create(data);
+		client.id = this.storage.addData(client);
+		return client;
+	}
+
+	ClientRepository.prototype.refund = function(id, value){
+		var client = this.storage.getById(id);
+		client.money+=value;
+	}
+
+	return ClientRepository;
+})()
+
+var clientRep = new ClientRepository();
 

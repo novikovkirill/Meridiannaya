@@ -1,17 +1,29 @@
-function ShopRepository() {
-	Repository.apply(this,arguments);
-}
+var ShopRepository = (function(){
 
-ShopRepository.prototype = Object.create(Repository.prototype);
-ShopRepository.prototype.constructor = ShopRepository;
+	var instance;
 
-ShopRepository.prototype.createShop = function(data){
-	var shop = Shop.create(data);
-	this.storage.addData(shop);
-	return shop;
-}
+	function ShopRepository() {
+		if ( !instance )
+			instance = this;
+		else return instance;
+		Repository.apply(this,arguments);
+	}
 
-ShopRepository.prototype.findByCity = function(value){
-	return this.storage.findByKeyValue("city", value)
-}
+	ShopRepository.prototype = Object.create(Repository.prototype);
+	ShopRepository.prototype.constructor = ShopRepository;
 
+	ShopRepository.prototype.createShop = function(data){
+		var shop = Shop.create(data);
+		shop.id = this.storage.addData(shop);
+		return shop;
+	}
+
+	ShopRepository.prototype.findByCity = function(cityname){
+		return this.storage.findByKeyValue("city", cityname)
+	}
+
+	return ShopRepository;
+
+})()
+
+var shopRep = new ShopRepository();

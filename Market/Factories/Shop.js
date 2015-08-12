@@ -1,6 +1,7 @@
 function Shop(){
 
 }
+
 Shop.create = function(obj) {
 	var shop = new Shop();
 	shop.name = obj.name;

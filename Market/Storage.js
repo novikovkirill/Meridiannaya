@@ -6,6 +6,7 @@ function Storage(){
 Storage.prototype.addData = function(data){
 	var id = this.idCounter();
 	this.dataList[id] = data;
+	return id;
 }
 
 Storage.prototype.getAll = function(){
