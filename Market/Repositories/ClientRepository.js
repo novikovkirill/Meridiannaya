@@ -12,7 +12,7 @@ var ClientRepository = (function(){
 	ClientRepository.prototype = Object.create(Repository.prototype);
 	ClientRepository.prototype.constructor = ClientRepository;
 
-	ClientRepository.prototype.createClient = function(data){
+	ClientRepository.prototype.create = function(data){
 		var client = Client.create(data);
 		client.id = this.storage.addData(client);
 		return client;

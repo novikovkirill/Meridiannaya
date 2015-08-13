@@ -12,7 +12,7 @@ var ShopRepository = (function(){
 	ShopRepository.prototype = Object.create(Repository.prototype);
 	ShopRepository.prototype.constructor = ShopRepository;
 
-	ShopRepository.prototype.createShop = function(data){
+	ShopRepository.prototype.create = function(data){
 		var shop = Shop.create(data);
 		shop.id = this.storage.addData(shop);
 		return shop;

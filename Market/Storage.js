@@ -38,7 +38,6 @@ Storage.prototype.delete = function(id){
 function makeId() {
   var currentCount = 0;
 
-  // возвращаемся к функции
   function counter() {
     return currentCount++;
   }

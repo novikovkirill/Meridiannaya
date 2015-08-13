@@ -1,14 +1,3 @@
-function Shop(){
-
-}
-
-Shop.create = function(obj) {
-	var shop = new Shop();
-	shop.name = obj.name;
-	shop.city = obj.city;
-	return shop;
-}
-
 Shop.prototype.addProduct = function(data){
 	var prodRep = new ProductRepository;
 	data.shopId = this.id;

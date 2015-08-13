@@ -11,7 +11,7 @@ module.exports = function(config){
       'Repositories/ClientRepository.js',
       'Repositories/OrderRepository.js',
       'Factories/*.js',
-      'test/repositorySpec.js'
+      'test/appSpec.js'
     ],
 
     autoWatch : true,

@@ -12,7 +12,7 @@ var OrderRepository = (function(){
 	OrderRepository.prototype = Object.create(Repository.prototype);
 	OrderRepository.prototype.constructor = OrderRepository;
 
-	OrderRepository.prototype.createOrder = function(data){
+	OrderRepository.prototype.create = function(data){
 		var prodRep = new ProductRepository;
 		var product = prodRep.getById(data.productId);
 		if (product.amount >= data.amount){

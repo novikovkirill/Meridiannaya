@@ -1,11 +1,12 @@
 describe("Repository", function() {
+  
   it("should create storage", function(){
     expect(shopRep.storage).toBeDefined();
-  })
+  });
 
   it("should be singlotone object", function(){
     expect(shopRep == new ShopRepository).toBe(true);
-  })
+  });
 
   it("should add shop to storage", function(){
     shopRep.createShop({name: "Книжный", city: "Казань"});

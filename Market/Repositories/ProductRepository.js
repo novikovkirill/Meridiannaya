@@ -12,13 +12,13 @@ var ProductRepository = (function(){
 	ProductRepository.prototype = Object.create(Repository.prototype);
 	ProductRepository.prototype.constructor = ProductRepository;
 
-	ProductRepository.prototype.createProduct = function(data){
+	ProductRepository.prototype.create = function(data){
 		var product = Product.create(data);
 		product.id = this.storage.addData(product);
 		return product;
 	}
 
-	ProductRepository.prototype.searchByShopId = function(id){
+	ProductRepository.prototype.findByShopId = function(id){
 		return this.storage.findByKeyValue("shopId", id);
 	}
 
