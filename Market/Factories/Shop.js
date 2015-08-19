@@ -1,9 +1,9 @@
-function Shop(){
+function Shop(obj){
 
 }
 
 Shop.create = function(obj) {
-	var shop = new Shop();
+	var shop = new Shop(obj);
 	shop.name = obj.name;
 	shop.city = obj.city;
 	return shop;

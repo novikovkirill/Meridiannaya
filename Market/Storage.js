@@ -20,9 +20,10 @@ Storage.prototype.getById = function(id){
 Storage.prototype.findByKeyValue = function(key, value){
 	var res = [];
 	value = value.toString().toLowerCase();
-	for (var id in this.dataList)
+	for (var id in this.dataList){
 		if (this.dataList[id][key].toString().toLowerCase() == value)
 			res.push(this.dataList[id]);
+	}
 	return res;
 }
 

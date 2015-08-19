@@ -1,0 +1,8 @@
+<h2>Список товаров</h2>
+
+<table class="table table-stripped">
+	<tr><th>Наименование</th><th>Цена</th><th>Количество товара на складе</th></tr>
+	<tr ng-repeat="product in prodTable"><td>{{product.name}}</td><td>{{product.price}}</td><td>{{product.amount}}</td></tr>
+</table>
+
+<a href="#/products/addProduct" class="thumb"><button>Добавить товар</button></a>

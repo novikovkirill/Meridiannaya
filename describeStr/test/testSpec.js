@@ -1,7 +1,11 @@
 describe("stringByNum", function() {
 
   it("Тест с целым числом", function() {
-    expect(stringByNum(8)).toBe('31131211131221');
+    start = new Date().getTime();
+    //expect(stringByNum(8)).toBe('31131211131221');
+    console.log(stringByNum(58));
+    elapsed = new Date().getTime() - start;
+    console.log(elapsed);
   });
 
   it("Тест с отрицательным числом", function() {

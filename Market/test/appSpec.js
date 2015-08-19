@@ -12,8 +12,7 @@ describe ("Launcher", function() {
 	var shops_in_kazan = shopRep.findByCity("Kazan")
 	var products = prodRep.getAll()
 	var tshirts = prodRep.find("name", "t­shirt")
-	/*shop3.name = "The Best Shop"
-	shop3 = Shop.update(shop3)*/
+	shopRep.update(2, {name: "The Best Shop"})
 	client = clientRep.create({name: "John Smith", city: "Kazan"})
 	client.refund(1000) // пополнить денежный счет
 	var product = tshirts[0]
@@ -34,6 +33,10 @@ describe ("Launcher", function() {
 
 	it("should return shops from Kazan", function(){
 		expect(shops_in_kazan.length).toBe(2);
+	});
+
+	it("should update shop's name", function(){
+		expect(shopRep.getById(2).name).toBe("The Best Shop");
 	});
 
 	it("should return all products from storage", function(){
