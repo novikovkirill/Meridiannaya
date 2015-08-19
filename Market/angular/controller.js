@@ -6,7 +6,7 @@
 	.controller("productTableCtrl", function($scope){
 					$scope.prodTable = prodRep.getAll();
 	})
-	.controller("formCtrl", function($scope){
+	.controller("formCtrl", function($scope, $location){
 		$scope.addProduct = function(){
 			var prodName = $scope.name;
 			var prodPrice = $scope.price;
@@ -15,8 +15,12 @@
 				alert("Ошибка! Все поля должны быть заполнены.")
 			else if (prodName.length < 3)
 				alert("Ошибка! Название товара должно состоять минимум из трёх символов.")
-			else 
-				prodRep.create({name: prodName, price: prodPrice, amount: prodAmount, shopId: 0})
+			else {
+				prodRep.create({name: prodName, price: prodPrice, amount: prodAmount, shopId: 0});
+				$scope.name = $scope.price = $scope.amount = '';
+				$location.path('/products');
+				alert("Товар успешно добавлен.");
+			}
 		}
 	})
 

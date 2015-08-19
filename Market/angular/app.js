@@ -8,7 +8,7 @@
 	  function($routeProvider) {
 	    $routeProvider.
 	      when('/products', {
-	        templateUrl: 'Market/angular/productTableTemplate.html',
+	        templateUrl: 'Market/angular/productListTemplate.html',
 	        controller: 'productTableCtrl'
 	      }).
 	      when('/products/addProduct', {
