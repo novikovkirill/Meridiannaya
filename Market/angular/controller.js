@@ -17,7 +17,6 @@
 				alert("Ошибка! Название товара должно состоять минимум из трёх символов.")
 			else {
 				prodRep.create({name: prodName, price: prodPrice, amount: prodAmount, shopId: 0});
-				$scope.name = $scope.price = $scope.amount = '';
 				$location.path('/products');
 				alert("Товар успешно добавлен.");
 			}

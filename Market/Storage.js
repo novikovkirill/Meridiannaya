@@ -1,11 +1,11 @@
 function Storage(){
-	this.dataList = {};
-	this.idCounter = makeId();
+	this.dataList = localStorage;
+	this.idCounter = makeId(this.dataList);
 }
 
 Storage.prototype.addData = function(data){
 	var id = this.idCounter();
-	this.dataList[id] = data;
+	localStorage.setItem(id, JSON.stringify(data));
 	return id;
 }
 
@@ -21,8 +21,9 @@ Storage.prototype.findByKeyValue = function(key, value){
 	var res = [];
 	value = value.toString().toLowerCase();
 	for (var id in this.dataList){
-		if (this.dataList[id][key].toString().toLowerCase() == value)
-			res.push(this.dataList[id]);
+		var parsed = JSON.parse(this.dataList[id]);
+		if (parsed[key].toString().toLowerCase() == value)
+			res.push(parsed);
 	}
 	return res;
 }
@@ -36,8 +37,16 @@ Storage.prototype.delete = function(id){
 	delete this.dataList[id];
 }
 
-function makeId() {
-  var currentCount = 0;
+function makeId(dataList) {
+
+  var maxId = 0;
+
+  for (var key in dataList){
+  	if (+key > maxId)
+  		maxId = +key;
+  }
+
+  var currentCount = maxId+1;
 
   function counter() {
     return currentCount++;

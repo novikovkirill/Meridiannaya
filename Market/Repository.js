@@ -7,10 +7,11 @@
 	}
 
 	Repository.prototype.getAll = function(){
-		var dataList = this.storage.getAll();
+		var storage = this.storage.getAll();
 		var res = [];
-		for (var id in dataList)
-			res.push(dataList[id]);
+		for (var key in storage){
+			res.push(JSON.parse(storage[key]))
+		}
 		return res;
 	}
 
