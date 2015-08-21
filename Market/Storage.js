@@ -1,11 +1,16 @@
-function Storage(){
-	this.dataList = localStorage;
+function Storage(type){
+	if (localStorage[type])
+		this.dataList = JSON.parse(localStorage[type]);
+	else 
+		this.dataList = {};
 	this.idCounter = makeId(this.dataList);
+	this.type = type;
 }
 
 Storage.prototype.addData = function(data){
 	var id = this.idCounter();
-	localStorage.setItem(id, JSON.stringify(data));
+	this.dataList[id] = data;
+	localStorage.setItem(this.type, angular.toJson(this.dataList));
 	return id;
 }
 
@@ -21,9 +26,8 @@ Storage.prototype.findByKeyValue = function(key, value){
 	var res = [];
 	value = value.toString().toLowerCase();
 	for (var id in this.dataList){
-		var parsed = JSON.parse(this.dataList[id]);
-		if (parsed[key].toString().toLowerCase() == value)
-			res.push(parsed);
+		if (this.dataList[id][key].toString().toLowerCase() == value)
+			res.push(this.dataList[id]);
 	}
 	return res;
 }
@@ -31,6 +35,7 @@ Storage.prototype.findByKeyValue = function(key, value){
 Storage.prototype.update = function(id, data){
 	for (var key in data)
 		this.dataList[id][key] = data[key];
+	localStorage.setItem(type, angular.toJson(this.dataList));
 }
 
 Storage.prototype.delete = function(id){

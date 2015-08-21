@@ -1,5 +1,5 @@
 	function Repository() {
-		this.storage = new Storage;
+		
 	}	
 
 	Repository.prototype.getById = function(id){
@@ -10,7 +10,7 @@
 		var storage = this.storage.getAll();
 		var res = [];
 		for (var key in storage){
-			res.push(JSON.parse(storage[key]))
+			res.push(storage[key])
 		}
 		return res;
 	}
