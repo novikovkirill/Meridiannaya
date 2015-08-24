@@ -11,14 +11,20 @@
 			var prodName = $scope.name;
 			var prodPrice = $scope.price;
 			var prodAmount = $scope.amount;
-			if (prodName === undefined || prodPrice === undefined || prodAmount === undefined)
-				alert("Ошибка! Все поля должны быть заполнены.")
-			else if (prodName.length < 3)
-				alert("Ошибка! Название товара должно состоять минимум из трёх символов.")
-			else {
+			try{
+				if(!prodName || !prodPrice || !prodAmount)
+					throw new SyntaxError("Данные отсутствуют");
+				if (prodName.length < 3)
+					throw new SyntaxError("Данные некорректны")
 				prodRep.create({name: prodName, price: prodPrice, amount: prodAmount, shopId: 0});
 				$location.path('/products');
-				alert("Товар успешно добавлен.");
+				alert("Товар успешно добавлен.");				
+			}
+			catch(e){
+				if (e.message == "Данные отсутствуют")
+					alert("Ошибка! Все поля должны быть заполнены");
+				if (e.message == "Данные некорректны")
+					alert("Ошибка! Название товара должно состоять как минимум из трёх символов.");
 			}
 		}
 	})

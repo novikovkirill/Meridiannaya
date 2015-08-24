@@ -40,6 +40,7 @@ Storage.prototype.update = function(id, data){
 
 Storage.prototype.delete = function(id){
 	delete this.dataList[id];
+	localStorage.setItem(type, angular.toJson(this.dataList));
 }
 
 function makeId(dataList) {

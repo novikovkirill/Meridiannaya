@@ -6,7 +6,7 @@ var ProductRepository = (function(){
 		if ( !instance )
 			instance = this;
 		else return instance;
-		this.storage = new Storage("products")
+		this.storage = new Storage("products");
 	}
 
 	ProductRepository.prototype = Object.create(Repository.prototype);

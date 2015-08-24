@@ -6,7 +6,7 @@ var ClientRepository = (function(){
 		if ( !instance )
 			instance = this;
 		else return instance;
-	    Repository.apply(this,arguments);
+	    this.storage = new Storage("clients");
 	}
 
 	ClientRepository.prototype = Object.create(Repository.prototype);
