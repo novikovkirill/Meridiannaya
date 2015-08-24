@@ -9,9 +9,9 @@ function Storage(type){
 
 Storage.prototype.addData = function(data){
 	var id = this.idCounter();
+	data.id = id;
 	this.dataList[id] = data;
 	localStorage.setItem(this.type, angular.toJson(this.dataList));
-	return id;
 }
 
 Storage.prototype.getAll = function(){
@@ -35,17 +35,17 @@ Storage.prototype.findByKeyValue = function(key, value){
 Storage.prototype.update = function(id, data){
 	for (var key in data)
 		this.dataList[id][key] = data[key];
-	localStorage.setItem(type, angular.toJson(this.dataList));
+	localStorage.setItem(this.type, angular.toJson(this.dataList));
 }
 
 Storage.prototype.delete = function(id){
 	delete this.dataList[id];
-	localStorage.setItem(type, angular.toJson(this.dataList));
+	localStorage.setItem(this.type, angular.toJson(this.dataList));
 }
 
 function makeId(dataList) {
 
-  var maxId = 0;
+  var maxId = -1;
 
   for (var key in dataList){
   	if (+key > maxId)

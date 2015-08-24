@@ -14,7 +14,7 @@ var ProductRepository = (function(){
 
 	ProductRepository.prototype.create = function(data){
 		var product = Product.create(data);
-		product.id = this.storage.addData(product);
+		this.storage.addData(product);
 		return product;
 	}
 

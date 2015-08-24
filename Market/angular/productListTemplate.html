@@ -2,7 +2,7 @@
 
 <table class="table table-stripped">
 	<tr><th>Наименование</th><th>Цена</th><th>Количество товара на складе</th></tr>
-	<tr ng-repeat="product in prodTable"><td>{{product.name}}</td><td>{{product.price}}</td><td>{{product.amount}}</td></tr>
+	<tr ng-repeat="product in prodTable"><td>{{product.name}}</td><td>{{product.price}}</td><td>{{product.amount}}</td><td><button ng-click="deleteProduct(product.id)">Удалить товар</button></td></tr>
 </table>
 
 <a href="#/products/addProduct" class="thumb"><button>Добавить товар</button></a>

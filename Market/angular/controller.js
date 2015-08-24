@@ -3,8 +3,12 @@
 	"use strict";
 
 	var ctrl = angular.module('marketAppControllers', [])
-	.controller("productTableCtrl", function($scope){
+	.controller("productTableCtrl", function($scope, $route){
 					$scope.prodTable = prodRep.getAll();
+					$scope.deleteProduct = function(prodId){
+						prodRep.delete(prodId);
+						$route.reload();
+					}
 	})
 	.controller("formCtrl", function($scope, $location){
 		$scope.addProduct = function(){
